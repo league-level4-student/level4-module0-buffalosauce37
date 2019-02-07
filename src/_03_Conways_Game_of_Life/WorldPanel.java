@@ -142,8 +142,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 			endY = 0;
 		}
 			
-		for (int i = startX; i < endX; i++) {
-			for (int j = startY; j < endY; j++) {
+		for (int i = startX; i <= endX; i++) {
+			for (int j = startY; j <= endY; j++) {
 				if( i != x || j != y ) {
 					if(cells[i][j].isAlive){
 						numNeighbors +=1;
