@@ -18,7 +18,7 @@ public class Maze {
 		// using i and j as the location
 for (int i = 0; i < w; i++) {
 	for (int j = 0; j < h; j++) {
-		cells[i][j] = new Cell();
+		cells[i][j] = new Cell(i,j);
 	}
 }
 	}
