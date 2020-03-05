@@ -1,5 +1,12 @@
 package _02_Pixel_Art;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,6 +20,7 @@ public class GridInputPanel extends JPanel{
 	private JTextField rowsField;
 	private JTextField colsField;
 	private JButton submitButton;
+	private static final String DATA_FILE = "src/_04_Serialization/saved.dat";
 			
 	PixelArtMaker pam;
 	
@@ -67,6 +75,26 @@ public class GridInputPanel extends JPanel{
 	private void invalidateInput() {
 		JOptionPane.showMessageDialog(null, "Be sure all fields are complete with positive numbers.", "ERROR", 0);
 	}
-	
+	private static void save(Serilization_for_Art data) {
+		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static Serilization_for_Art load() {
+		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
+			return (Serilization_for_Art) ois.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			// This can occur if the object we read from the file is not
+			// an instance of any recognized class
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }
